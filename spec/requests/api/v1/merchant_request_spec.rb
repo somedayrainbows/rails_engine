@@ -83,7 +83,7 @@ describe "Merchants API" do
     expect(merchants[0]["name"]).to eq("Merchant1")
   end
 
-  it "can find all merchants by created date" do
+  it "finds all merchants by creation date" do
      merchant1 = Merchant.create(created_at: "2012-05-02T03:04:05.000Z")
      merchant2 = Merchant.create(created_at: "2017-05-02T03:04:05.000Z")
      merchant3 = Merchant.create(created_at: "2017-05-02T03:04:06.000Z")
@@ -96,7 +96,7 @@ describe "Merchants API" do
      expect(merchants[0]["name"]).to eq(merchant1.name)
    end
 
-    it "can find all merchants by updated date" do
+    it "finds all merchants by updated date" do
       merchant1 = Merchant.create(updated_at: "2017-05-02T03:04:05.000Z")
       merchant2 = Merchant.create(updated_at: "2017-05-02T03:04:05.000Z")
       merchant3 = Merchant.create(updated_at: "2017-05-17T03:04:06.000Z")
