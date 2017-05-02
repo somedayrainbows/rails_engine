@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/codyborders/rails_engine.png?label=ready&title=Ready)](https://waffle.io/codyborders/rails_engine)
 # README
 
 This README would normally document whatever steps are necessary to get the
