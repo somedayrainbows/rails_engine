@@ -72,7 +72,7 @@ describe 'Items API' do
     expect(item[0]["name"]).to eq("glove")
   end
 
-  it 'returns random item' do
+  it 'returns a random item' do
     create_list(:item, 100)
 		get '/api/v1/items/random'
 
