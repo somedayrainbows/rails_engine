@@ -7,5 +7,3 @@ RSpec.describe Customer, type: :model do
     it { should have_many :transactions }
   end
 end
-
-  

@@ -2,7 +2,18 @@ require 'rails_helper'
 
 describe 'Items API' do
   it "sends a list of invoice items" do
-    create_list(:invoice_item, 3)
+    customer = create(:customer)
+    merchant = create(:merchant)
+    invoice = create(:invoice, customer: customer, merchant: merchant)
+    item = create(:item, merchant: merchant)
+    # item2 = create(:item, merchant_id: merchant)
+    # item3 = create(:item, merchant_id: merchant)
+    #
+    # create_list(:invoice_item, 3)
+    invoice_item = create(:invoice_item, invoice: invoice, item: item)
+    # invoice_item2 = create(:invoice_item, item: item1)
+    # invoice_item2 = create(:invoice_item, item: item3)
+    # invoice_item2 = create(:invoice_item, item: item2)
 
     get '/api/v1/invoice_items'
 
@@ -10,12 +21,17 @@ describe 'Items API' do
 
     invoice_items = JSON.parse(response.body)
 
-    expect(invoice_items.count).to eq(3)
+    expect(invoice_items.count).to eq(1)
 
   end
 
   it "can get one invoice item by its id" do
-    id = create(:invoice_item).id
+    customer = create(:customer)
+    merchant = create(:merchant)
+    item = create(:item, merchant: merchant)
+    invoice = create(:invoice, customer: customer, merchant: merchant)
+    id = create(:invoice_item, merchant: merchant, item: item).id
+
 
     get "/api/v1/invoice_items/#{id}"
 
@@ -26,7 +42,16 @@ describe 'Items API' do
   end
 
   it "can find a invoice item by name" do
-    name = create(:invoice_item).name
+    customer = create(:customer)
+    merchant = create(:merchant)
+
+    invoice = create(:invoice, customer: customer, merchant: merchant)
+    item1 = create(:item, merchant: merchant)
+    #
+    # create_list(:invoice_item, 3)
+    invoice_item = create(:invoice_item, invoice: invoice, item: item1)
+    # name = create(:invoice_item).name
+    name = invoice_item.name
 
     get "/api/v1/invoice_items/find?name=#{name}"
 
@@ -38,6 +63,7 @@ describe 'Items API' do
 
   it "can find an invoice-item by creation date" do
     created_invoice_item = create(:invoice_item, created_at: "2017-05-02T03:04:05.000Z")
+
 
     get "/api/v1/invoice_items/find?created_at=#{created_invoice_item.created_at}"
 
