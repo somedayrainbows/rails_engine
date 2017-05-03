@@ -1,4 +1,3 @@
-
 class Api::V1::Items::FindItemsController < ApplicationController
 
   def index
