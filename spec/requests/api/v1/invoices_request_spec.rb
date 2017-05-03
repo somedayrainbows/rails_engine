@@ -72,17 +72,18 @@ describe "Invoices API" do
 
   it 'returns a random invoice' do
     create_list(:invoice, 100)
-		get '/api/v1/invoices/random'
+    
+    get '/api/v1/invoices/random'
 
-		invoice_1 = JSON.parse(response.body)
+    invoice_1 = JSON.parse(response.body)
 
-		random_invoice = Invoice.find(invoice_1["id"])
+    random_invoice = Invoice.find(invoice_1["id"])
 
-		get '/api/v1/invoices/random'
+    get '/api/v1/invoices/random'
 
-		invoice_2 = JSON.parse(response.body)
-		random_invoice2 = Invoice.find(invoice_2["id"])
+    invoice_2 = JSON.parse(response.body)
+    random_invoice2 = Invoice.find(invoice_2["id"])
 
-		expect(invoice_1).to_not eq(invoice_2)
+    expect(invoice_1).to_not eq(invoice_2)
   end
 end
