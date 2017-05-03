@@ -72,17 +72,18 @@ describe "Customers API" do
 
   it 'returns a random customer' do
     create_list(:customer, 100)
-		get '/api/v1/customers/random'
+    
+    get '/api/v1/customers/random'
 
-		customer_1 = JSON.parse(response.body)
+    customer_1 = JSON.parse(response.body)
 
-		random_customer = Customer.find(customer_1["id"])
+    random_customer = Customer.find(customer_1["id"])
 
-		get '/api/v1/customers/random'
+    get '/api/v1/customers/random'
 
-		customer_2 = JSON.parse(response.body)
-		random_customer2 = Customer.find(customer_2["id"])
+    customer_2 = JSON.parse(response.body)
+    random_customer2 = Customer.find(customer_2["id"])
 
-		expect(customer_1).to_not eq(customer_2)
+    expect(customer_1).to_not eq(customer_2)
   end
 end
