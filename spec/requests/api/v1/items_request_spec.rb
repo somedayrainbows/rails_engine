@@ -74,17 +74,18 @@ describe 'Items API' do
 
   it 'returns a random item' do
     create_list(:item, 100)
-		get '/api/v1/items/random'
+	  
+    get '/api/v1/items/random'
 
-		item_1 = JSON.parse(response.body)
+    item_1 = JSON.parse(response.body)
 
-		random_item = Item.find(item_1["id"])
+    random_item = Item.find(item_1["id"])
 
-		get '/api/v1/items/random'
+    get '/api/v1/items/random'
 
-		item_2 = JSON.parse(response.body)
-		random_item2 = Item.find(item_2["id"])
+    item_2 = JSON.parse(response.body)
+    random_item2 = Item.find(item_2["id"])
 
-		expect(item_1).to_not eq(item_2)
+    expect(item_1).to_not eq(item_2)
   end
 end
