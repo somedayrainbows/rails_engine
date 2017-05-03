@@ -30,7 +30,7 @@ describe 'Items API' do
     merchant = create(:merchant)
     item = create(:item, merchant: merchant)
     invoice = create(:invoice, customer: customer, merchant: merchant)
-    id = create(:invoice_item, merchant: merchant, item: item).id
+    id = create(:invoice_item, invoice: invoice, item: item).id
 
 
     get "/api/v1/invoice_items/#{id}"
@@ -62,6 +62,13 @@ describe 'Items API' do
   end
 
   it "can find an invoice-item by creation date" do
+    customer = create(:customer)
+    merchant = create(:merchant)
+
+    invoice = create(:invoice, customer: customer, merchant: merchant)
+    item1 = create(:item, merchant: merchant)
+
+    invoice_item = create(:invoice_item, invoice: invoice, item: item1)
     created_invoice_item = create(:invoice_item, created_at: "2017-05-02T03:04:05.000Z")
 
 
@@ -85,9 +92,16 @@ describe 'Items API' do
   end
 
   it "can find all invoice-items by name" do
-    invoice_item1 = InvoiceItem.create(name: "glove")
-    invoice_item2 = InvoiceItem.create(name: "ball")
-    invoice_item3 = InvoiceItem.create(name: "bat")
+
+    customer = create(:customer)
+    merchant = create(:merchant)
+
+    invoice = create(:invoice, customer: customer, merchant: merchant)
+    item1 = create(:item, merchant: merchant)
+
+    invoice_item1 = InvoiceItem.create(name: "glove", invoice: invoice, item: item1)
+    invoice_item2 = InvoiceItem.create(name: "ball", invoice: invoice, item: item1)
+    invoice_item3 = InvoiceItem.create(name: "bat", invoice: invoice, item: item1)
 
     get "/api/v1/invoice_items/find_all?name=#{invoice_item1.name}"
 

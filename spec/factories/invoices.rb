@@ -3,5 +3,6 @@ FactoryGirl.define do
     name "baseball bat"
     description "used to hit baseballs"
     customer
+    merchant
   end
 end
