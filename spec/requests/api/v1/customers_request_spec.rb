@@ -76,7 +76,7 @@ describe "Customers API" do
 
 		customer_1 = JSON.parse(response.body)
 
-		random_customer = customer.find(customer_1["id"])
+		random_customer = Customer.find(customer_1["id"])
 
 		get '/api/v1/customers/random'
 
