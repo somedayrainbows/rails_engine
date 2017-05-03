@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe "Invoices API" do
   it "sends a list of invoices" do
-    
+
     create_list(:invoice, 3)
 
     get '/api/v1/invoices'
@@ -59,16 +59,14 @@ describe "Invoices API" do
   end
 
   it "can find all invoices by name" do
-    invoice1 = Invoice.create(name: "Invoice1")
-    invoice2 = Invoice.create(name: "Invoice2")
-    invoice3 = Invoice.create(name: "Invoice3")
+    invoice1 = create(:invoice)
 
     get "/api/v1/invoices/find_all?name=#{invoice1.name}"
 
     invoice = JSON.parse(response.body)
 
     expect(response).to be_success
-    expect(invoice[0]["name"]).to eq("Invoice1")
+    expect(invoice[0]["name"]).to eq(invoice1.name)
   end
 
   it 'returns a random invoice' do

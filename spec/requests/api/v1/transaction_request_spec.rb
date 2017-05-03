@@ -2,7 +2,10 @@ require "rails_helper"
 
 describe "Transactions API" do
   it "can send a list of transactions" do
-    create_list(:transaction, 3)
+    invoice = create(:invoice)
+    transaction1 = create(:transaction, invoice: invoice)
+    transaction2 = create(:transaction, invoice: invoice)
+    transaction3 = create(:transaction, invoice: invoice)
 
     get "/api/v1/transactions"
 
@@ -32,7 +35,7 @@ describe "Transactions API" do
     get "/api/v1/transactions/find?credit_card_number=#{credit_card}"
 
     expect(response).to be_success
-    
+
     transaction = JSON.parse(response.body)
 
     expect(transaction["credit_card_number"]).to eq(credit_card)

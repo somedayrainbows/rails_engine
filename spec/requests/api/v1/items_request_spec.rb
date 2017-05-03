@@ -60,9 +60,9 @@ describe 'Items API' do
   end
 
   it "can find all items by name" do
-    item1 = Item.create(name: "glove")
-    item2 = Item.create(name: "ball")
-    item3 = Item.create(name: "bat")
+    item1 = create(:item, name: "glove")
+    item2 = create(:item, name: "ball")
+    item3 = create(:item, name: "bat")
 
     get "/api/v1/items/find_all?name=#{item1.name}"
 
@@ -74,7 +74,7 @@ describe 'Items API' do
 
   it 'returns a random item' do
     create_list(:item, 100)
-	  
+
     get '/api/v1/items/random'
 
     item_1 = JSON.parse(response.body)
