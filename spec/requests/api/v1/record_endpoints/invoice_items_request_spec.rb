@@ -44,21 +44,20 @@ describe 'Items API' do
   it "can find a invoice item by name" do
     customer = create(:customer)
     merchant = create(:merchant)
-
     invoice = create(:invoice, customer: customer, merchant: merchant)
     item1 = create(:item, merchant: merchant)
+    invoice_item_1 = create(:invoice_item)
     #
     # create_list(:invoice_item, 3)
     invoice_item = create(:invoice_item, invoice: invoice, item: item1)
-    # name = create(:invoice_item).name
-    name = invoice_item.name
+    id = invoice_item.id
 
-    get "/api/v1/invoice_items/find?name=#{name}"
+    get "/api/v1/invoice_items/find?id=#{id}"
 
     invoice_item = JSON.parse(response.body)
 
     expect(response).to be_success
-    expect(invoice_item["name"]).to eq(name)
+    expect(invoice_item["id"]).to eq(id)
   end
 
   it "can find an invoice-item by creation date" do
@@ -77,7 +76,7 @@ describe 'Items API' do
     invoice_item = JSON.parse(response.body)
 
     expect(response).to be_success
-    expect(invoice_item["name"]).to eq(created_invoice_item.name)
+    expect(invoice_item["id"]).to eq(created_invoice_item.id)
   end
 
   it "can find an invoice-item by updated date" do
@@ -88,7 +87,7 @@ describe 'Items API' do
     invoice_item = JSON.parse(response.body)
 
     expect(response).to be_success
-    expect(invoice_item["name"]).to eq(updated_invoice_item.name)
+    expect(invoice_item["id"]).to eq(updated_invoice_item.id)
   end
 
   it "can find all invoice-items by name" do
@@ -99,16 +98,15 @@ describe 'Items API' do
     invoice = create(:invoice, customer: customer, merchant: merchant)
     item1 = create(:item, merchant: merchant)
 
-    invoice_item1 = InvoiceItem.create(name: "glove", invoice: invoice, item: item1)
-    invoice_item2 = InvoiceItem.create(name: "ball", invoice: invoice, item: item1)
-    invoice_item3 = InvoiceItem.create(name: "bat", invoice: invoice, item: item1)
-
-    get "/api/v1/invoice_items/find_all?name=#{invoice_item1.name}"
+    invoice_item1 = create(:invoice_item, item_id: item1.id, invoice_id:  invoice.id)
+    invoice_item2 = create(:invoice_item, item_id: item1.id, invoice_id: invoice.id)
+    
+    get "/api/v1/invoice_items/find_all?id=#{invoice_item1.id}"
 
     invoice_item = JSON.parse(response.body)
 
     expect(response).to be_success
-    expect(invoice_item[0]["name"]).to eq("glove")
+    expect(invoice_item[0]["id"]).to eq(invoice_item1.id)
   end
 
   it 'returns a random invoice-item' do
