@@ -25,14 +25,14 @@ describe "Customers API" do
   end
 
   it "can find a customer by name" do
-    name = create(:customer).name
+    customer1 = create(:customer)
 
-    get "/api/v1/customers/find?name=#{name}"
+    get "/api/v1/customers/find?last_name=#{customer1.last_name}"
 
     customer = JSON.parse(response.body)
 
     expect(response).to be_success
-    expect(customer["name"]).to eq(name)
+    expect(customer["last_name"]).to eq(customer1.last_name)
   end
 
   it "can find an customer by creation date" do
@@ -43,7 +43,7 @@ describe "Customers API" do
     customer = JSON.parse(response.body)
 
     expect(response).to be_success
-    expect(customer["name"]).to eq(created_customer.name)
+    expect(customer["id"]).to eq(created_customer.id)
   end
 
   it "can find a customer by updated date" do
@@ -54,20 +54,16 @@ describe "Customers API" do
     customer = JSON.parse(response.body)
 
     expect(response).to be_success
-    expect(customer["name"]).to eq(updated_customer.name)
+    expect(customer["id"]).to eq(updated_customer.id)
   end
 
   it "can find all customers by name" do
-    customer1 = Customer.create(name: "Mike")
-    customer2 = Customer.create(name: "Mark")
-    customer3 = Customer.create(name: "Mindy")
-
-    get "/api/v1/customers/find_all?name=#{customer1.name}"
+    customers = create_list(:customer, 3)
+    get "/api/v1/customers/find_all?last_name=#{customers.first.last_name}"
 
     customer = JSON.parse(response.body)
-
     expect(response).to be_success
-    expect(customer[0]["name"]).to eq("Mike")
+    expect(customer[0]["last_name"]).to eq(customers.first.last_name)
   end
 
   it 'returns a random customer' do
@@ -83,7 +79,6 @@ describe "Customers API" do
 
     customer_2 = JSON.parse(response.body)
     random_customer2 = Customer.find(customer_2["id"])
-
-    expect(customer_1).to_not eq(customer_2)
+    expect(customer_1["id"]).to_not eq(customer_2["id"])
   end
 end
