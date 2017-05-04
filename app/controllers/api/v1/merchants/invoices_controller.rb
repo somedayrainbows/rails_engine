@@ -4,5 +4,4 @@ class Api::V1::Merchants::InvoicesController < ApplicationController
 		merchant = Merchant.find(params[:id])
 		render json: merchant.invoices
 	end
-
 end
