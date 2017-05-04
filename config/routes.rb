@@ -23,6 +23,7 @@ Rails.application.routes.draw do
         get "/find", to: "find_invoices#show"
         get "/find_all", to: "find_invoices#index"
         get '/random', to: 'random#show'
+        get "/:id/customer", to: "customer#show"
       end
       resources :invoices, only: [:index, :show]
 
