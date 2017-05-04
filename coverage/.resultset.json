@@ -277,6 +277,16 @@
         null,
         null
       ],
+      "/Users/Burtonious25/Turing/3module/rails_engine/app/controllers/api/v1/invoice_items/item_controller.rb": [
+        1,
+        null,
+        1,
+        1,
+        1,
+        null,
+        null,
+        null
+      ],
       "/Users/Burtonious25/Turing/3module/rails_engine/app/controllers/api/v1/merchants/items_controller.rb": [
         1,
         null,
@@ -329,16 +339,6 @@
         0,
         0
       ],
-      "/Users/Burtonious25/Turing/3module/rails_engine/app/controllers/api/v1/invoice_items/item_controller.rb": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
       "/Users/Burtonious25/Turing/3module/rails_engine/app/controllers/api/v1/items/invoice_items_controller.rb": [
         0,
         0,
@@ -378,6 +378,6 @@
         0
       ]
     },
-    "timestamp": 1493868997
+    "timestamp": 1493869424
   }
 }
