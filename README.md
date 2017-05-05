@@ -1,25 +1,11 @@
-[![Stories in Ready](https://badge.waffle.io/codyborders/rails_engine.png?label=ready&title=Ready)](https://waffle.io/codyborders/rails_engine)
-# README
+This application creates an API for a series of merchants and their transactions, invoices, items, and customers.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This application uses:
+  * Ruby version - 2.3.3
+  * Rails version - 5.0.2
+  * PostgreSQL
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+In order to run:
+ * Clone repository
+ * Move to root folder of project in command line
+ * Run 'rake csv:import' from command line
