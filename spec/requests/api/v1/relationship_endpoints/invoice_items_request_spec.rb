@@ -6,10 +6,8 @@ describe "invoice items api" do
     invoice_item = create(:invoice_item, invoice_id: invoice.id)
 
     get "/api/v1/invoice_items/#{invoice_item.id}/invoice"
-
     expect(response).to be_success
-    invoice = JSON.parse(response.body)
-
+    invoices = JSON.parse(response.body)
     expect(invoice_item['invoice_id']).to eq(invoice['id'])
   end
 

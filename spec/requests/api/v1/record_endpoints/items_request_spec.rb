@@ -17,7 +17,6 @@ describe 'Items API' do
   it "can get one item by its id" do
 
     id = create(:item).id
-
     get "/api/v1/items/#{id}"
 
     item = JSON.parse(response.body)

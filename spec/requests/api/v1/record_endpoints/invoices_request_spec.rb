@@ -25,26 +25,25 @@ describe "Invoices API" do
     expect(invoice["id"]).to eq(id)
   end
 
-  it "can find a invoice by name" do
-    name = create(:invoice).name
+  it "can find a invoice by id" do
+    invoice_id = create(:invoice)
 
-    get "/api/v1/invoices/find?name=#{name}"
+    get "/api/v1/invoices/find?id=#{invoice_id.id}"
 
     invoice = JSON.parse(response.body)
 
     expect(response).to be_success
-    expect(invoice["name"]).to eq(name)
+    expect(invoice["id"]).to eq(invoice_id.id)
   end
 
   it "can find an invoice by creation date" do
-    created_invoice = create(:invoice, created_at: "2017-05-02T03:04:05.000Z")
+    created_invoice = create(:invoice, created_at: "2017-05-04 23:05:01")
 
     get "/api/v1/invoices/find?created_at=#{created_invoice.created_at}"
 
     invoice = JSON.parse(response.body)
-
     expect(response).to be_success
-    expect(invoice["name"]).to eq(created_invoice.name)
+    expect(invoice["id"]).to eq(created_invoice.id)
   end
 
   it "can find an invoice by updated date" do
@@ -53,20 +52,18 @@ describe "Invoices API" do
     get "/api/v1/invoices/find?updated_at=#{updated_invoice.updated_at}"
 
     invoice = JSON.parse(response.body)
-
     expect(response).to be_success
-    expect(invoice["name"]).to eq(updated_invoice.name)
+    expect(invoice["id"]).to eq(updated_invoice.id)
   end
 
-  it "can find all invoices by name" do
+  it "can find all invoices by id" do
     invoice1 = create(:invoice)
 
-    get "/api/v1/invoices/find_all?name=#{invoice1.name}"
+    get "/api/v1/invoices/find_all?id=#{invoice1.id}"
 
     invoice = JSON.parse(response.body)
-
     expect(response).to be_success
-    expect(invoice[0]["name"]).to eq(invoice1.name)
+    expect(invoice[0]["id"]).to eq(invoice1.id)
   end
 
   it 'returns a random invoice' do
