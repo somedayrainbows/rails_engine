@@ -1,6 +1,15 @@
 class Api::V1::InvoiceItems::FindInvoiceItemsController < ApplicationController
 
-  def show
+ before_action :convert_price
+
+  def convert_price
+    if params[:unit_price]
+      price = params[:unit_price].split(".").join
+      params[:unit_price] = price
+    end
+  end
+
+	def show
     render json: InvoiceItem.find_by(find_invoice_items_params)
   end
 
