@@ -6,15 +6,9 @@ describe 'Items API' do
     merchant = create(:merchant)
     invoice = create(:invoice, customer: customer, merchant: merchant)
     item = create(:item, merchant: merchant)
-    # item2 = create(:item, merchant_id: merchant)
-    # item3 = create(:item, merchant_id: merchant)
-    #
-    # create_list(:invoice_item, 3)
-    invoice_item = create(:invoice_item, invoice: invoice, item: item)
-    # invoice_item2 = create(:invoice_item, item: item1)
-    # invoice_item2 = create(:invoice_item, item: item3)
-    # invoice_item2 = create(:invoice_item, item: item2)
 
+    invoice_item = create(:invoice_item, invoice: invoice, item: item)
+    
     get '/api/v1/invoice_items'
 
     expect(response).to be_success
@@ -100,7 +94,7 @@ describe 'Items API' do
 
     invoice_item1 = create(:invoice_item, item_id: item1.id, invoice_id:  invoice.id)
     invoice_item2 = create(:invoice_item, item_id: item1.id, invoice_id: invoice.id)
-    
+
     get "/api/v1/invoice_items/find_all?id=#{invoice_item1.id}"
 
     invoice_item = JSON.parse(response.body)

@@ -35,7 +35,7 @@ describe "Merchants API" do
     expect(merchant["name"]).to eq(name)
 
   end
-  
+
   it "finds a merchant by id" do
     id = create(:merchant).id
 
@@ -49,7 +49,7 @@ describe "Merchants API" do
 
   it "finds a merchant by creation date" do
     created_merchant = create(:merchant, created_at: "2017-05-02T03:04:05.000Z")
-    
+
     get "/api/v1/merchants/find?created_at=#{created_merchant.created_at}"
 
     merchant = JSON.parse(response.body)
@@ -75,11 +75,11 @@ describe "Merchants API" do
     merchant3 = Merchant.create(name: "Merchant3")
 
     get "/api/v1/merchants/find_all?name=#{merchant1.name}"
-    
+
     expect(response).to be_success
 
     merchants = JSON.parse(response.body)
-    
+
     expect(merchants[0]["name"]).to eq("Merchant1")
   end
 
@@ -108,4 +108,21 @@ describe "Merchants API" do
       expect(response).to be_success
       expect(merchants[0]["name"]).to eq(merchant1.name)
     end
-end
+
+    it 'returns a random merchant' do
+      create_list(:merchant, 50)
+
+      get '/api/v1/merchants/random'
+      
+      merchant_1 = JSON.parse(response.body)
+
+      random_merchant = Merchant.find(merchant_1["id"])
+
+      get '/api/v1/merchants/random'
+
+      merchant_2 = JSON.parse(response.body)
+      random_merchant2 = Merchant.find(merchant_2["id"])
+
+      expect(merchant_1).to_not eq(merchant_2)
+    end
+  end

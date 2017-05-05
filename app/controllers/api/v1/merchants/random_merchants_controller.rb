@@ -1,6 +1,6 @@
 class Api::V1::Merchants::RandomMerchantsController < ApplicationController
-  
+
   def show
-    @merchant = Merchant.all.shuffle.pop
+    render json: Merchant.find(Merchant.pluck(:id).shuffle.first)
   end
 end
