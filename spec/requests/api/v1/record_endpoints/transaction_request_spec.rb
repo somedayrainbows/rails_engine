@@ -54,4 +54,20 @@ describe "Transactions API" do
 
     expect(transactions[0]["credit_card_number"]).to eq(transaction1.credit_card_number)
   end
+  it 'returns a random transaction' do
+    create_list(:transaction, 50)
+
+    get '/api/v1/transactions/random'
+    
+    transaction_1 = JSON.parse(response.body)
+
+    random_transaction = Transaction.find(transaction_1["id"])
+
+    get '/api/v1/transactions/random'
+
+    transaction_2 = JSON.parse(response.body)
+    random_transaction2 = Transaction.find(transaction_2["id"])
+    expect(transaction_1).to_not eq(transaction_2)
+  end
 end
+
