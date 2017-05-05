@@ -17,7 +17,7 @@
 .byebug_history
 
 # Ignore simplecov
-/coverage
+coverage
 
 # Ignore CSV files
-/data
+data
