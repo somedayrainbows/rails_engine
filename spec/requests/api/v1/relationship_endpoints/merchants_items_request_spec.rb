@@ -27,7 +27,7 @@ describe "merchant api" do
     invoices = JSON.parse(response.body)
 
     expect(invoices.count).to eq(2)
-    expect(invoices.first["id"]).to eq(invoice1.id)
-    expect(invoices.last["id"]).to eq(invoice2.id)
+    expect(invoices.first["id"]).to eq(invoice2.id)
+    expect(invoices.last["id"]).to eq(invoice1.id)
   end
 end
