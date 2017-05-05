@@ -8,4 +8,7 @@ This application uses:
 In order to run:
  * Clone repository
  * Move to root folder of project in command line
+ * Run ‘bundle’
+ * Run ‘rake db:create’
+ * Run ‘rake db:migrate’
  * Run 'rake csv:import' from command line
